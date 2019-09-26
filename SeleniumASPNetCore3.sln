@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29318.209
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumASPNetCore3", "SeleniumASPNetCore3\SeleniumASPNetCore3.csproj", "{54064FCB-52AF-416A-BE63-22EA98043176}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeleniumASPNetCore3.Tests", "SeleniumASPNetCore3.Tests\SeleniumASPNetCore3.Tests.csproj", "{F9A71E33-0142-48BF-9737-67D3AA01300E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{54064FCB-52AF-416A-BE63-22EA98043176}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54064FCB-52AF-416A-BE63-22EA98043176}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54064FCB-52AF-416A-BE63-22EA98043176}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54064FCB-52AF-416A-BE63-22EA98043176}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9A71E33-0142-48BF-9737-67D3AA01300E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9A71E33-0142-48BF-9737-67D3AA01300E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9A71E33-0142-48BF-9737-67D3AA01300E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9A71E33-0142-48BF-9737-67D3AA01300E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {65216544-AE97-403D-9278-90A1C7FDAF2D}
+	EndGlobalSection
+EndGlobal
