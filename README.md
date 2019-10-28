@@ -4,7 +4,7 @@ Simple example showing how to run Selenium UI Tests with Asp.Net Core 3.0
 
 ## Authors
 
-Andrew herrick
+Andrew Herrick
 [@andrew_herrick](https://twitter.com/andrew_herrick)
 
 ## License
