@@ -1,11 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace SeleniumASPNetCore3
 {
@@ -20,7 +14,15 @@ namespace SeleniumASPNetCore3
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    webBuilder.UseStartup<Startup>();
+                    ConfigureWebHost(webBuilder);
                 });
+
+        //Used by testing tools to initialize an in-memory server for testing
+        public static IWebHostBuilder ConfigureWebHost(IWebHostBuilder builder)
+        {
+            builder.UseStartup<Startup>();
+
+            return builder;
+        }
     }
 }

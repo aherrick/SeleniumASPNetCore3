@@ -14,7 +14,7 @@ namespace SeleniumASPNetCore3.Tests
         public SeleniumTests(SeleniumServerFactory<Startup> server)
         {
             this.server = server;
-            server.CreateClient();
+            //server.CreateClient();
             var opts = new ChromeOptions();
             //opts.AddArgument("--headless"); // Optional, comment this out if you want to SEE the browser window
             opts.AddArgument("no-sandbox");
@@ -22,11 +22,13 @@ namespace SeleniumASPNetCore3.Tests
         }
 
         [Fact]
-        public void FooterOfThePageContainsPrivacyLink()
+        public void BannerTextEqualsWelcome()
         {
             this.browser.Navigate().GoToUrl(this.server.RootUri);
-            Assert.Contains(browser.FindElements(By.CssSelector("body")),
-                x => x.GetAttribute("href").EndsWith("/Home/Privacy"));
+
+            var bannerText = browser.FindElement(By.Id("banner-text"));
+
+            Assert.Equal("Welcome", bannerText.Text);
         }
     }
 }

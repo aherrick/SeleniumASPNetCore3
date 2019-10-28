@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Hosting;
+﻿using Microsoft.AspNetCore;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
+using SeleniumASPNetCore3;
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -14,8 +15,6 @@ public class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>
     private readonly Process process;
 
     private IWebHost host;
-
-    private IHost host2;
 
     public SeleniumServerFactory()
     {
@@ -31,29 +30,27 @@ public class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>
             },
         };
         process.Start();
+
+        CreateServer(CreateWebHostBuilder());
     }
 
-    public string RootUri { get; set; } // Save this use by tests
+    protected override IWebHostBuilder CreateWebHostBuilder()
+    {
+        // use the utility method here to instantiate the web host.
+        return Program.ConfigureWebHost(WebHost.CreateDefaultBuilder(Array.Empty<string>()));
+    }
 
-    // never gets called
+    public string RootUri { get; set; }
+
     protected override TestServer CreateServer(IWebHostBuilder builder)
     {
-        // Real TCP port
         host = builder.Build();
+
         host.Start();
         RootUri = host.ServerFeatures.Get<IServerAddressesFeature>().Addresses.LastOrDefault(); // Last is https://localhost:5001!
 
         // Fake Server we won't use...this is lame. Should be cleaner, or a utility class
         return new TestServer(new WebHostBuilder().UseStartup<FakeStartup>());
-    }
-
-    protected override IHost CreateHost(IHostBuilder builder)
-    {
-        host2 = builder.Build();
-
-        host2.Start();
-
-        return host2;
     }
 
     protected override void Dispose(bool disposing)

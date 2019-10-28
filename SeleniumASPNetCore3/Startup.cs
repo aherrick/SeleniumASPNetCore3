@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.IO;
 
 namespace SeleniumASPNetCore3
 {
     public class Startup
     {
+        private const string SolutionName = "SeleniumASPNetCore3";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -40,7 +40,16 @@ namespace SeleniumASPNetCore3
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
+
+            // HACK in order to force wwwroot path for both web and Test.
+            // when running Selenium UI tests the File path would change to Test/netcore3.0/
+            // see when debugging:             var foo = System.IO.Directory.GetCurrentDirectory();
+
+            var rootPath = env.ContentRootPath.Substring(0, env.ContentRootPath.LastIndexOf($@"\{SolutionName}\", StringComparison.Ordinal) + $@"\{SolutionName}\".Length);
+            app.UseStaticFiles(new StaticFileOptions()
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(rootPath, SolutionName, "wwwroot"))
+            });
 
             app.UseRouting();
 
