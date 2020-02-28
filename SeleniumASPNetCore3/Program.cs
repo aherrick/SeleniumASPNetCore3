@@ -14,15 +14,7 @@ namespace SeleniumASPNetCore3
             Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
-                    ConfigureWebHost(webBuilder);
+                    webBuilder.UseStartup<Startup>();
                 });
-
-        //Used by testing tools to initialize an in-memory server for testing
-        public static IWebHostBuilder ConfigureWebHost(IWebHostBuilder builder)
-        {
-            builder.UseStartup<Startup>();
-
-            return builder;
-        }
     }
 }

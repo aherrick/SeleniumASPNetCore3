@@ -9,7 +9,7 @@ using System;
 using System.Diagnostics;
 using System.Linq;
 
-public class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>
+public class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>, IDisposable
     where TStartup : class
 {
     private readonly Process process;
@@ -36,8 +36,7 @@ public class SeleniumServerFactory<TStartup> : WebApplicationFactory<TStartup>
 
     protected override IWebHostBuilder CreateWebHostBuilder()
     {
-        // use the utility method here to instantiate the web host.
-        return Program.ConfigureWebHost(WebHost.CreateDefaultBuilder(Array.Empty<string>()));
+        return WebHost.CreateDefaultBuilder(null).UseStartup<Startup>();
     }
 
     public string RootUri { get; set; }

@@ -42,7 +42,7 @@ namespace SeleniumASPNetCore3
             app.UseHttpsRedirection();
 
             // HACK in order to force wwwroot path for both web and Test.
-            // when running Selenium UI tests the File path would change to Test/netcore3.0/
+            // when running Selenium UI tests the File path would change to Test/netcore3.1/
             // see when debugging:             var foo = System.IO.Directory.GetCurrentDirectory();
 
             var rootPath = env.ContentRootPath.Substring(0, env.ContentRootPath.LastIndexOf($@"\{SolutionName}\", StringComparison.Ordinal) + $@"\{SolutionName}\".Length);
